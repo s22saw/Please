@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인덱스</title>
+
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" href="/style/style_Index.css">
+    </th:block>
+
+</head>
+<body>
+    <div id="wrap" layout:fragment="content">
+
+        <hr class="sepLine">
+
+        <!-- 작업 영역 시작 -->
+        <main id="main">
+
+            <!-- 서비스 카테고리 목록 시작 -->
+            <div id="productCategory">
+                <ul id="productCategoryUl" class="dFlex">
+                    <li class="productCategoryLi"><a th:href="@{/categoryProduct(category='주문제작')}">주문제작</a></li>
+                    <li class="productCategoryLi"><a th:href="@{/categoryProduct(category='문서작성')}">문서작성</a></li>
+                    <li class="productCategoryLi"><a th:href="@{/categoryProduct(category='번역·통역')}">번역·통역</a></li>
+                    <li class="productCategoryLi"><a th:href="@{/categoryProduct(category='사진·영상')}">사진·영상</a></li>
+                    <li class="productCategoryLi"><a th:href="@{/categoryProduct(category='상담')}">상담</a></li>
+                    <li class="productCategoryLi"><a th:href="@{/categoryProduct(category='기타')}">기타</a></li>
+                </ul>
+            </div>
+            <!-- 서비스 카테고리 목록 끝 -->
+
+            <hr class="sepLine">
+
+            <div id="contents">
+
+                <!-- 인기 서비스 목록 시작 -->
+                <div id="populProductHeader">
+                    <span>인기 서비스</span>
+                </div>
+                <div id="populProductList" class="dFlex">
+                    <div class="populProduct" th:each="list : ${selectPopulProduct}">
+                        <a th:href="@{/detailProduct(productNo=${list.productNo})}">
+                            <img th:src="@{/productFileUpload/} + ${list.fileName1}" class="productImg" alt="productImg">
+                            <span class="compName" th:text="${list.userName}" />
+                            <span class="prodSubject" th:text="${list.productName}" />
+                            <span class="prodPrice" th:text="${#numbers.formatInteger(list.productPrice, 0, 'COMMA')} + ' 원'" />
+                            <span class="prodRate">
+                                <span class="reviewScore" th:text="'★ ' + ${list.reviewScore}" />
+                                &nbsp;&nbsp;|&nbsp;&nbsp;[[${list.reviewCnt}]] 개의 평가
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <!-- 인기 서비스 목록 끝 -->
+
+                <br>
+
+                <!-- 최신 서비스 목록 시작 -->
+                <div id="newProductHeader">
+                    <span>최신 등록 서비스</span>
+                </div>
+                <div id="newProductList" class="dFlex">
+                    <div class="newProduct" th:each="list : ${selectNewProduct}">
+                        <a th:href="@{/detailProduct(productNo=${list.productNo})}">
+                            <img th:src="@{/productFileUpload/} + ${list.fileName1}" class="productImg" alt="productImg">
+                            <span class="compName" th:text="${list.userName}" />
+                            <span class="prodSubject" th:text="${list.productName}" />
+                            <span class="prodPrice" th:text="${#numbers.formatInteger(list.productPrice, 0, 'COMMA')} + ' 원'" />
+                            <span class="prodRate">
+                                <span class="reviewScore" th:text="'★ ' + ${list.reviewScore}" />
+                                &nbsp;&nbsp;|&nbsp;&nbsp;[[${list.reviewCnt}]] 개의 평가
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <!-- 최신 서비스 목록 끝 -->
+
+                <br><br>
+
+                <hr class="sepLine">
+
+                <br>
+
+                <!-- 인기 판매자 랭킹 시작 -->
+                <div id="productRankHeader">
+                    <span>인기 판매자 랭킹</span>
+                </div>
+                <div id="productRank" class="dFlex">
+                    <div class="productRankBoard">
+                        <span th:each="list, userStat : ${selectProductRank1}" th:if="${userStat.index eq 0}" class="productRankBoardSubject">[[${list.category}]] 판매자 랭킹</span>
+                        <table class="productRankTbl table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="c1">순위</td>
+                                <td class="c1">이름</td>
+                                <td class="c1">평점</td>
+                            </tr>
+                            <tr th:each="list : ${selectProductRank1}">
+                                <td th:text="${list.rankNo}" />
+                                <td th:text="${list.userName}" />
+                                <td th:text="'★ ' + ${list.reviewScore}" />
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="productRankBoard">
+                        <span th:each="list, userStat : ${selectProductRank2}" th:if="${userStat.index eq 0}" class="productRankBoardSubject">[[${list.category}]] 판매자 랭킹</span>
+                        <table class="productRankTbl table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="c1">순위</td>
+                                <td class="c1">이름</td>
+                                <td class="c1">평가</td>
+                            </tr>
+                            <tr th:each="list : ${selectProductRank2}">
+                                <td th:text="${list.rankNo}" />
+                                <td th:text="${list.userName}" />
+                                <td th:text="'★ ' + ${list.reviewScore}" />
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="productRankBoard">
+                        <span th:each="list, userStat : ${selectProductRank3}" th:if="${userStat.index eq 0}" class="productRankBoardSubject">[[${list.category}]] 판매자 랭킹</span>
+                        <table class="productRankTbl table table-bordered">
+                            <tbody>
+                            <tr>
+                                <td class="c1">순위</td>
+                                <td class="c1">이름</td>
+                                <td class="c1">평가</td>
+                            </tr>
+                            <tr th:each="list : ${selectProductRank3}">
+                                <td th:text="${list.rankNo}" />
+                                <td th:text="${list.userName}" />
+                                <td th:text="'★ ' + ${list.reviewScore}" />
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- 인기 판매자 랭킹 끝 -->
+
+            </div>
+
+        </main>
+        <!--  작업 영역 끝  -->
+
+        <hr class="sepLine">
+
+    </div>
+</body>
+</html>

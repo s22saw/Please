@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 등록</title>
+
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/style/style_Product.css">
+	</th:block>
+
+	<th:block layout:fragment="script">
+		<script src="/script/script_Product.js"></script>
+	</th:block>
+
+</head>
+<body>
+    <div id="wrap" layout:fragment="content">
+
+    	<hr class="sepLine">
+
+   		<form th:action="@{addProduct}" name="productFrm" id="productFrm" class="form-inline" enctype="multipart/form-data" method="post">
+			<main id="productMain" class="dFlex">
+
+				<!-- userID 세션 전달용 -->
+				<input type="hidden" name="sessionUserID" value="<%=sessionUserID%>">
+
+				<!-- 서비스 이미지 영역 시작 -->
+				<div id="productImgArea">
+					<div id="productMainImg" class="thumbnailImg">
+						<input type="file" name="fileName1" id="fileName1" class="fileUploadInput">
+						<label for="fileName1">메인 이미지 등록</label>
+					</div>
+					<div id="productSubImg" class="dFlex">
+						<div id="thumbnailImg1" class="thumbnailImg">
+							<input type="file" name="fileName2" id="fileName2" class="fileUploadInput">
+							<label for="fileName2">이미지 등록</label>
+						</div>
+						<div id="thumbnailImg2" class="thumbnailImg">
+							<input type="file" name="fileName3" id="fileName3" class="fileUploadInput">
+							<label for="fileName3">이미지 등록</label>
+						</div>
+						<div id="thumbnailImg3" class="thumbnailImg">
+							<input type="file" name="fileName4" id="fileName4" class="fileUploadInput">
+							<label for="fileName4">이미지 등록</label>
+						</div>
+						<div id="thumbnailImg4" class="thumbnailImg">
+							<input type="file" name="fileName5" id="fileName5" class="fileUploadInput">
+							<label for="fileName5">이미지 등록</label>
+						</div>
+					</div>
+				</div>
+				<!-- 서비스 이미지 영역 끝 -->
+
+				<!-- 서비스 세부 메뉴 영역 시작 -->
+				<div id="productDetail">
+					<div id="productTopInfo">
+						<div id="productMenu">
+							<ul>
+								<li id="liCategory" class="productMenuLi">
+									<select name="category" id="category" class="form-control input-sm">
+										<option value=""> - 분류 - </option>
+										<option>주문제작</option>
+										<option>문서작성</option>
+										<option>번역·통역</option>
+										<option>사진·영상</option>
+										<option>상담</option>
+										<option>기타</option>
+									</select>
+								</li>
+								<li id="liProductName" class="productMenuLi">
+									<input type="text" id="productName" name="productName" placeholder="상품명 입력" class="form-control input-sm">
+								</li>
+								<li class="productMenuLi">
+									<p>
+										<div id="productOptionTitle">상품 가격</div>
+										<div id="productOption">
+											<div id="productPrice" class="productOptionDetail"><input type="text" name="productPrice" placeholder="상품 가격 입력" class="form-control input-sm"> 원</div>
+										</div>
+									</p>
+								</li>
+							</ul>
+						</div>
+						<hr>
+						<div id="sellerInfo">
+							<div id="sellerInfoTitle">판매자 정보</div>
+							<div id="sellerPic"><img src="/memberFileUpload/defaultProfile.png" class="memberImg" alt="memberImg" onerror="this.src='/images/defaultProfile.png'"></div>
+							<div id="sellerName">판매자 이름</div>
+							<div id="sellerContact">판매자 연락처</div>
+						</div>
+						<hr>
+						<div id="productReviewTopTitle">서비스 평가</div>
+						<div id="productReviewTop" class="dFlex">
+							<div class="reviewItem">
+								<div class="reviewUserInfo">
+									<span class="reviewUserName">구매자</span>
+									<span class="reviewRate">★★★★★</span>
+									<span class="reviewDate">2022.01.01</span>
+								</div>
+								<div class="reviewUserText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet. </div>
+								<p class="reviewMore"><a href="">더보기</a></p>
+							</div>
+							<div class="reviewItem">
+								<div class="reviewUserInfo">
+									<span class="reviewUserName">구매자</span>
+									<span class="reviewRate">★★★★★</span>
+									<span class="reviewDate">2022.01.01</span>
+								</div>
+								<div class="reviewUserText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet. </div>
+								<p class="reviewMore"><a href="">더보기</a></p>
+							</div>
+							<div class="reviewItem">
+								<div class="reviewUserInfo">
+									<span class="reviewUserName">구매자</span>
+									<span class="reviewRate">★★★★★</span>
+									<span class="reviewDate">2022.01.01</span>
+								</div>
+								<div class="reviewUserText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet. </div>
+								<p class="reviewMore"><a href="">더보기</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 서비스 세부 메뉴 영역 끝 -->
+			</main>
+
+		<!-- 서비스 설명 영역 시작 -->
+		<div id="productDesc">
+			<p>
+				<textarea name="productDescTxt" id="productDescTxt" class="form-control" rows="10" placeholder="서비스 설명 입력"></textarea>
+			</p>
+		</div>
+   		<!-- 서비스 설명 영역 끝 -->
+
+		<button type="submit" id="productSbmBtn" class="btn btn-block">등록하기</button>
+		</form>
+   			
+    	<hr class="sepLine">
+
+    </div>
+    <!-- div#wrap 끝 -->
+
+</body>
+</html>

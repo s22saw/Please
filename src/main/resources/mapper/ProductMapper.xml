@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="please.spring.mapper.ProductMapper">
+
+    <select id="selectPopulProduct" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select b.product_no, a.user_id, a.user_name, b.category,
+        b.product_name, b.product_price, b.review_score, b.review_cnt,
+        b.file_name1, b.file_size1, b.file_name2, b.file_size2,
+        b.file_name3, b.file_size3, b.file_name4, b.file_size4,
+        b.file_name5, b.file_size5, b.write_datetime
+        from user a, product b
+        where a.user_id = b.user_id order by b.review_score desc, b.review_cnt desc limit 5
+        ]]>
+    </select>
+
+    <select id="selectNewProduct" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select b.product_no, a.user_id, a.user_name, b.category,
+        b.product_name, b.product_price, b.review_score, b.review_cnt,
+        b.file_name1, b.file_size1, b.file_name2, b.file_size2,
+        b.file_name3, b.file_size3, b.file_name4, b.file_size4,
+        b.file_name5, b.file_size5, b.write_datetime from user a, product b
+        where a.user_id = b.user_id order by b.write_datetime desc limit 5
+        ]]>
+    </select>
+
+    <select id="selectAllProduct" parameterType="hashmap" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select b.product_no, a.user_id, a.user_name, b.category,
+        b.product_name, b.product_price, b.review_score, b.review_cnt,
+        b.file_name1, b.file_size1, b.file_name2, b.file_size2,
+        b.file_name3, b.file_size3, b.file_name4, b.file_size4,
+        b.file_name5, b.file_size5, b.write_datetime from user a, product b
+        where a.user_id = b.user_id order by b.write_datetime desc
+        limit #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
+
+    <select id="selectCategoryProduct" parameterType="please.spring.dto.ProductDTO" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select b.product_no, a.user_id, a.user_name, b.category,
+        b.product_name, b.product_price, b.review_score, b.review_cnt,
+        b.file_name1, b.file_size1, b.file_name2, b.file_size2,
+        b.file_name3, b.file_size3, b.file_name4, b.file_size4,
+        b.file_name5, b.file_size5, b.write_datetime from user a, product b
+        where a.user_id = b.user_id and b.category = #{category}
+        order by b.write_datetime desc limit #{pageStart}, #{perPageNum}
+        ]]>
+    </select>
+
+    <select id="selectCategoryProductCnt" parameterType="String" resultType="int">
+        <![CDATA[
+        select count(*)
+        from product
+        where category = #{category}
+        ]]>
+    </select>
+
+    <select id="selectAllProductCnt" resultType="int">
+        <![CDATA[
+        select count(*)
+        from product
+        ]]>
+    </select>
+
+    <select id="selectAllNewProduct" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select b.product_no, a.user_id, a.user_name, b.category,
+        b.product_name, b.product_price, b.review_score, b.review_cnt,
+        b.file_name1, b.file_size1, b.file_name2, b.file_size2,
+        b.file_name3, b.file_size3, b.file_name4, b.file_size4,
+        b.file_name5, b.file_size5, b.write_datetime from user a, product b
+        where a.user_id = b.user_id order by b.write_datetime desc
+        ]]>
+    </select>
+
+    <select id="selectProductRank" parameterType="please.spring.dto.ProductDTO" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select @rownum:=@rownum+1 as rank_no, a.product_no, a.category,
+        a.user_id, b.user_name, c.review_score, c.review_cnt from product a, user b,
+        (select product_no, round(avg(review_score),1) review_score, count(1) review_cnt
+        from review group by product_no) c, (select @rownum :=0) as r
+        where a.product_no = c.product_no and a.user_id = b.user_id
+        and a.category = #{category}
+        order by c.review_score desc, c.review_cnt limit 5
+        ]]>
+    </select>
+
+    <select id="selectDetailProduct" parameterType="int" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select b.product_no, a.user_id, a.user_name, a.pic_file_name, a.user_email,
+        a.user_contact, b.category, b.product_name,
+        b.product_desc, b.product_price, b.review_score, b.review_cnt,
+        b.file_name1, b.file_size1, b.file_name2, b.file_size2,
+        b.file_name3, b.file_size3, b.file_name4, b.file_size4,
+        b.file_name5, b.file_size5, b.write_datetime from user a, product b
+        where a.user_id = b.user_id and b.product_no=#{productNo}
+        ]]>
+    </select>
+
+    <select id="selectReviewSimpleInfoLimit" parameterType="int" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select a.user_id, a.user_name, b.product_no, c.review_no,
+		c.review_score, c.review_desc, c.write_datetime from user a, product b, review c
+		where a.user_id = c.user_id and b.product_no = c.product_no and b.product_no=#{productNo}
+		order by c.write_datetime desc limit 3
+        ]]>
+    </select>
+
+    <select id="selectReviewSimpleInfo" parameterType="int" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select a.user_id, a.user_name, b.product_no, c.review_no, 
+		c.review_score, c.review_desc, c.write_datetime from user a, product b, review c 
+		where a.user_id = c.user_id and b.product_no = c.product_no and b.product_no=#{productNo}
+		order by c.write_datetime desc
+        ]]>
+    </select>
+
+    <insert id="insertProduct" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        insert into product (
+		product_no, user_id, category,
+		product_name, product_desc, product_price,
+		file_name1, file_size1, file_name2, file_size2,
+		file_name3, file_size3, file_name4, file_size4,
+		file_name5, file_size5, write_datetime
+		)
+		values (
+		    #{productNo}, #{sessionUserID}, #{category},
+		    #{productName}, #{productDesc}, #{productPrice},
+		    #{fileName1}, #{fileSize1}, #{fileName2}, #{fileSize2},
+		    #{fileName3}, #{fileSize3}, #{fileName4}, #{fileSize4},
+		    #{fileName5}, #{fileSize5}, now()
+		)
+        ]]>
+    </insert>
+
+    <update id="updateProduct" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        update product set
+        category=#{category},
+		product_name=#{productName}, product_desc=#{productDesc}, product_price=#{productPrice},
+		file_name1=#{fileName1}, file_size1=#{fileSize1}, file_name2=#{fileName2}, file_size2=#{fileSize2},
+		file_name3=#{fileName3}, file_size3=#{fileSize3}, file_name4=#{fileName4}, file_size4=#{fileSize4},
+		file_name5=#{fileName5}, file_size5=#{fileSize5}
+		where user_id=#{sessionUserID} and product_no=#{sessionProductNo}
+        ]]>
+    </update>
+
+    <delete id="deleteProduct" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        delete from product where product_no=#{sessionProductNo}
+        and user_id=#{sessionUserID}
+        ]]>
+    </delete>
+
+    <select id="selectProductOwner" parameterType="please.spring.dto.ProductDTO" resultType="int">
+        <![CDATA[
+        select count(*)
+        from product
+        where user_id=#{sessionUserID} and product_no=#{sessionProductNo}
+        ]]>
+    </select>
+
+    <select id="selectPurchaseReview" parameterType="please.spring.dto.ProductDTO" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select b.product_no, a.user_id, a.user_name, b.product_name, c.purchase_no, c.user_id, c.purchase_datetime
+        , c.review_no, c.review_yn
+        from user a, product b, purchase c
+        where a.user_id = b.user_id
+        and b.product_no = c.product_no
+        and c.user_id = #{sessionUserID}
+        and c.purchase_no = #{purchaseNo};
+        ]]>
+    </select>
+
+    <update id="updatePurchaseReview">
+        <![CDATA[
+        update purchase a,
+	   (select review_no from
+			(select review_no from review b
+			where exists (select 1 from purchase c where b.purchase_no = c.purchase_no)) e
+		) d
+        set a.review_no = d.review_no,
+            a.review_yn = 'y'
+        where a.purchase_no = #{purchaseNo};
+        ]]>
+    </update>
+
+    <insert id="insertReview" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        insert into review(
+        user_id, product_no, review_score, review_desc, write_datetime, purchase_no
+		)
+		values (
+		#{userID}, #{productNo}, #{reviewScore}, #{reviewDesc}, now(), #{purchaseNo}
+		)
+        ]]>
+    </insert>
+
+    <update id="refreshReview" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        update product a,
+        (select product_no, avg(review_score) review_score, count(*) review_cnt
+		from review group by product_no) b
+		set   a.review_score = b.review_score, a.review_cnt = b.review_cnt
+		where a.product_no = b.product_no
+        ]]>
+    </update>
+
+    <select id="selectBasketUser" parameterType="please.spring.dto.ProductDTO" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select user_name, user_email, user_contact from user
+		where user_id = #{sessionUserID}
+        ]]>
+    </select>
+
+    <select id="selectBasket" parameterType="please.spring.dto.ProductDTO" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select a.user_name, b.product_no, b.product_name, b.product_price, c.basket_no
+		from	user a, product b, basket c
+		where a.user_id = b.user_id
+		and b.product_no = c.product_no
+		and c.user_id = #{sessionUserID}
+		order by c.product_no desc
+        ]]>
+    </select>
+
+    <insert id="insertBasket" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        insert into basket(
+        user_id, product_no
+        )
+        values (
+        #{sessionUserID}, #{sessionProductNo}
+        )
+        ]]>
+    </insert>
+
+    <delete id="deleteBasketItem" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        delete from basket
+        where user_id = #{sessionUserID}
+        and basket_no = #{basketNo}
+        ]]>
+    </delete>
+
+    <delete id="deleteBasketAll" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        delete from basket
+        where user_id = #{sessionUserID}
+        ]]>
+    </delete>
+
+    <insert id="insertPurchaseAll" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        insert into purchase(user_id, product_no)
+        select user_id, product_no from basket
+        where user_id = #{sessionUserID}
+        ]]>
+    </insert>
+
+    <insert id="insertPurchaseItem" parameterType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        insert into purchase(
+        user_id, product_no
+        )
+        select user_id, product_no from basket
+        where user_id = #{sessionUserID}
+        and basket_no = #{basketNo}
+        ]]>
+    </insert>
+
+    <select id="selectPurchaseList" parameterType="please.spring.dto.ProductDTO" resultType="please.spring.dto.ProductDTO">
+        <![CDATA[
+        select a.purchase_no, a.product_no, c.user_name, b.user_id, b.product_name, b.product_price, a.purchase_datetime, a.review_no, a.review_yn
+        from purchase a, product b, user c
+        where a.user_id = #{sessionUserID}
+        and a.product_no = b.product_no
+        and b.user_id = c.user_id
+        order by a.purchase_datetime desc;
+        ]]>
+    </select>
+
+</mapper>

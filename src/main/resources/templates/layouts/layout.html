@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <!-- head 시작 -->
+    <head>
+        <meta charset="UTF-8">
+
+        <!-- 컨텐츠페이지의 CSS 영역이 들어감 -->
+        <!--        <th:block layout:fragment="css"></th:block>-->
+
+        <!-- bootstrap CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+        <script src="/source/jquery-3.6.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <script src="/script/script_Login.js"></script>
+
+<!--        @{/js/common/common.js} 는 src/main/resources/static이 생략되어있습니다.-->
+
+        <!-- 공통 styleSheet 적용 -->
+        <link th:href="@{/style/style_Common.css}" rel="stylesheet">
+
+        <!--        <script th:src="@{/script/script123.js}"></script>-->
+
+        <!-- 컨텐츠페이지의 스크립트 영역이 들어감 -->
+        <!--        <th:block layout:fragment="script"></th:block>-->
+    </head>
+    <!-- head 끝 -->
+    <!-- header 시작 -->
+    <header th:replace="fragments/header :: headerFragment"></header>
+    <!-- header 끝 -->
+    <body>
+    <!-- content 시작 -->
+    <div layout:fragment="content"></div>
+    <!-- content 끝 -->
+
+    <!-- footer 시작 -->
+    <footer th:replace="fragments/footer :: footerFragment"></footer>
+    <!-- footer 끝 -->
+    </body>
+</html>

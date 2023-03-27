@@ -1,0 +1,175 @@
+@charset "UTF-8";
+@import url(/source/style_Reset.css);
+
+/*****************************************/
+/**** 사용자 관련 영역 시작 (member) 시작 ****/
+/*****************************************/
+
+/*-----------------------------------------*/
+/*---- 로그인 페이지 시작 (/member/login) ----*/
+/*-----------------------------------------*/
+
+div.loginDiv {
+	text-align: center;
+	padding: 40px;
+}
+
+div.loginDiv > form#loginFrm {
+	padding: 20px;
+	border: 2px solid rgba(0, 0, 0, 0.1);
+	display: inline-block;
+}
+
+.loginDiv > #loginFrm input {
+	
+	width: 320px;
+	font-size: 17px;
+	padding: 13px 16px;
+	margin-bottom: 7px;
+	display: block;
+}
+
+.loginDiv > #loginFrm button {
+	width: 320px;
+	color: #fff;
+	font-size: 18px;
+	padding: 15px 20px;
+	border: none;
+	margin-top: 17px;
+	margin-bottom: 7px;
+	background-color: #4e87f0;
+	cursor: pointer;
+	display: block;
+}
+
+/*----------------------------------------*/
+/*---- 로그인 페이지 끝 (/member/login) ----*/
+/*----------------------------------------*/
+
+/*----------------------------------------------------------------------------*/
+/*---- 회원 가입, 수정 페이지 시작 (/member/memberJoin, /member/memberModify) ----*/
+/*----------------------------------------------------------------------------*/
+
+div#wrap main#mainMemberJoin {
+    margin: 0 auto;
+}
+
+#mainMemberJoin div#contents {
+    margin: 0 auto;
+}
+
+#wrap table#regFrmTbl {
+	width: 100%;
+	border-collapse: collapse;
+} 
+
+#wrap #regFrm > span, #regUpdateFrm>span {
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#wrap #regFrmTbl td {
+	height: 48px;
+	padding: 10px 6px;
+	border-bottom: 1px solid #ccc;
+	vertical-align: middle;
+}
+#wrap #regFrmTbl td:first-child {
+	width: 140px;	
+	padding-left: 14px;
+} 
+#wrap #regFrmTbl td:nth-child(2) {
+	width: 500px;	
+} 
+
+#wrap #regFrmTbl td:last-child>span {
+	color: #888;
+	font-size: 13px;
+} 
+
+
+#wrap #regFrmTbl td input {
+	font-size: 17px;
+	padding: 3px 10px;
+}
+
+#wrap #regFrmTbl td.req::after {
+	content: " *";
+	color: #f80;
+} 	
+
+#wrap #regFrmTbl tr:last-child>td {
+	text-align: center;
+	border-bottom: none;
+}	
+
+#wrap #regFrmTbl tr:last-child>td button {
+	margin: 0 20px;
+}
+
+#regFrmTbl td#modPicFileImg img.profileImg {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+/*---------------------------------------------------------------------------*/
+/*---- 회원 가입, 수정 페이지 끝 (/member/memberJoin, /member/memberModify) ----*/
+/*---------------------------------------------------------------------------*/
+	
+/*---------------------------------------------------*/
+/*---- 회원 정보 페이지 시작 (/member/memberDetail) ----*/
+/*---------------------------------------------------*/
+
+div#memberInfo {
+	width: 100%;
+}
+
+div#memberInfo h1 {
+	margin: 0 auto;
+	padding-bottom: 10px;
+	width: 700px;
+	font-weight: bold;
+}
+
+div#memberInfo table#memberInfoTbl {
+	width: 700px;
+	margin: 0 auto;
+}
+
+table#memberInfoTbl td{
+	padding: 14px 30px;
+}
+
+table#memberInfoTbl td.c1 {
+	width: 150px;
+	font-weight: bold;
+	background-color: #eef1f8;
+}
+
+td.c2 img.profileImg {
+	width: 100px;
+	height: 100px;
+}
+
+div#memberSubMenu {
+    width: 700px;
+    margin: 0 auto;
+    padding: 10px 0;
+    justify-content: center;
+}
+
+div#memberSubMenu a {
+    padding: 0 20px;
+}
+
+/*---------------------------------------------------*/
+/*---- 회원 정보 페이지 끝 (/member/memberDetail) ----*/
+/*---------------------------------------------------*/
+
+/****************************************/
+/**** 사용자 관련 영역 시작 (member) 끝 ****/
+/****************************************/

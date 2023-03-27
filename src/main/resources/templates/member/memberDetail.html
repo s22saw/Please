@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 정보</title>
+
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/style/style_Member.css">
+	</th:block>
+
+	<th:block layout:fragment="script">
+    	<script src="/script/script_Join.js"></script>
+	</th:block>
+
+</head>
+<body>
+    <!-- div#wrap 시작 -->
+    <div id="wrap" layout:fragment="content">
+    	<hr class="sepLine">
+    	<main id="main" class="dFlex">
+    		
+    		<!-- 실제 작업 영역 시작 -->
+    		<div id="memberInfo">
+    				<h1>회원 정보</h1>
+				<th:block th:each="list : ${selectMemberDetail}">
+    				<table id="memberInfoTbl" class="table-bordered">
+    					<tbody>
+    						<tr>
+    							<td class="c1">프로필 사진</td>
+    							<td class="c2">
+    								<img th:src="@{/memberFileUpload/} + ${list.picFileName}" class="profileImg" alt="profileImg" onerror="this.src='/images/defaultProfile.png'">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="c1">아이디</td>
+    							<td class="c2" th:text="${list.userID}"></td>
+    						</tr>
+    						<tr>
+    							<td class="c1">이름</td>
+    							<td class="c2" th:text="${list.userName}"></td>
+    						</tr>
+    						<tr>
+    							<td class="c1">Email</td>
+    							<td class="c2" th:text="${list.userEmail}"></td>
+    						</tr>
+    						<tr>
+    							<td class="c1">연락처</td>
+    							<td class="c2" th:text="${list.userContact}"></td>
+    						</tr>
+    						<tr>
+    							<td class="c1">주소</td>
+    							<td class="c2" th:text="${list.userAddress}"></td>
+    						</tr>
+    						<tr>
+    							<td class="c1">관심분야</td>
+    							<td class="c2">
+									[[${list.interest1}]]
+    								<br>
+									[[${list.interest2}]]
+    							</td>
+    						</tr>
+    					</tbody>
+    				</table>
+				</th:block>
+    		</div>
+    		<!-- 실제 작업 영역 끝 -->
+
+    	</main>
+    	<!--  main#main  -->
+
+		<div id="memberSubMenu" class="dFlex">
+			<a th:href="@{/memberModify}">
+				<button type="button" id="memberModifyBtn" class="btn btn-primary">회원 정보 수정</button>
+			</a>
+			<a>
+				<button type="button" id="memberDeleteBtn" class="btn btn-primary">회원 탈퇴</button>
+			</a>
+		</div>
+    	<hr class="sepLine">
+
+    </div>
+    <!-- div#wrap 끝 -->
+
+</body>
+</html>

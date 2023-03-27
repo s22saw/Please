@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/style/style_Member.css">
+	</th:block>
+
+	<th:block layout:fragment="script">
+		<script src="/script/script_Login.js"></script>
+	</th:block>
+
+</head>
+<body>
+	<div class="loginDiv" layout:fragment="content">
+		<form th:action="@{login}" id="loginFrm" name="loginFrm" method="post">
+			<div id="loginArea">
+				<div id="loginInput">
+					<input type="text" name="userID" class="form-control" placeholder="아이디 입력" id="userID">
+					<input type="password" name="userPW" class="form-control" placeholder="비밀번호 입력" id="userPW">
+				</div>
+				<button type="submit" id="loginBtn" class="btn btn-primary">로그인</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<!-- header 시작 -->
+<header id="header" class="dFlex" th:fragment="headerFragment"> 	<!-- 로고, GNB -->
+    <div id="headerLogo">
+        <a href="/">
+            <img src="/images/headerLogo.png" alt="헤더로고이미지">
+        </a>
+    </div>
+    <nav id="gnb">
+        <ul id="mainMenu" class="dFlex">
+            <li id="mainLi1" class="mainLi">
+                <a href="/allProduct">서비스 목록</a>
+            </li>
+            <li id="mainLi2" class="mainLi">
+                <a href="/memberJoin" th:if="${session.memberDTO==null}">회원가입</a>
+                <a href="/memberDetail" th:if="${session.memberDTO!=null}">회원정보</a>
+            </li>
+            <li id="mainLi3" class="mainLi" th:if="${session.memberDTO!=null}">
+                <a href="/basketProduct" th:if="${session.memberDTO!=null} and ${session.memberDTO.userDiv==1}">장바구니</a>
+                <a href="/addProduct" th:if="${session.memberDTO!=null} and ${session.memberDTO.userDiv==2}">서비스 등록</a>
+            </li>
+            <li id="mainLi4" class="mainLi" th:if="${session.memberDTO!=null}">
+                <a href="/selectPurchaseList" th:if="${session.memberDTO!=null} and ${session.memberDTO.userDiv==1}">구매목록</a>
+            </li>
+            <li id="mainLi5" class="mainLi" th:if="${session.memberDTO==null}">
+                <a href="/login" th:if="${session.memberDTO==null}">
+                    <button type="button" id="gnbLoginBtn" class="btn btn-primary btn-sm">로그인</button>
+                </a>
+            </li>
+            <li id="mainLi6" class="mainLi" th:if="${session.memberDTO!=null}">
+                <span th:text="${session.memberDTO.userID} + ' 님 '" th:if="${session.memberDTO!=null}"></span>
+                <a th:href="@{/logout}" th:if="${session.memberDTO!=null}">
+                    <button type='button' id='gnbLogoutBtn' class='btn btn-primary btn-sm'>로그아웃</button>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<!-- header 끝 -->
+
+</body>
+</html>

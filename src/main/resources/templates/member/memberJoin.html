@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 가입</title>
+
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/style/style_Member.css">
+	</th:block>
+
+	<th:block layout:fragment="script">
+		<script src="/script/script_Join.js"></script>
+	</th:block>
+
+</head>
+<body>
+    <div id="wrap" layout:fragment="content">
+
+    	<hr class="sepLine">
+
+		<!-- 작업 영역 시작 -->
+		<main id="mainMemberJoin" class="dFlex">
+    		<div id="contents" class="joinInsert">
+    			<form th:action="@{memberJoin}" name="regFrm" id="regFrm" class="form-inline" enctype="multipart/form-data" method="post">
+					<span>회원 가입</span>
+
+					<!-- 회원 가입 정보 입력 시작 -->
+    				<table id="regFrmTbl" class="table table-bordered">
+    					<tbody>
+    						<tr>
+    							<td class="req">아이디</td>
+    							<td>
+    								<input type="text" name="userID" id="userID" class="form-control input-sm" maxlength="20" autofocus>
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="req">패스워드</td>
+    							<td>
+    								<input type="password" name="userPW" id="userPW" class="form-control input-sm" maxlength="20">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="req">이름</td>
+    							<td>
+    								<input type="text" name="userName" id="userName" class="form-control input-sm" maxlength="20">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="req">Email</td>
+    							<td>
+	    							<input type="text" name="userEmail" id="userEmail" class="form-control input-sm" maxlength="20" size="20">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td>프로필 사진</td>
+    							<td>
+    								<input type="file" name="picFile" id="picFile">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td>연락처 (-를 제외한 숫자를 기입하세요)</td>
+    							<td>
+    								<input type="text" name="userContact" id="userContact" class="form-control input-sm" maxlength="11">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td>주소</td>
+    							<td>    								
+    								<input type="text" name="userAddress" id="userAddress" class="form-control input-sm" maxlength="100" size="50">
+    							</td>
+    						</tr>
+    						<tr>
+    							<td>회원 유형</td>
+    							<td>
+    								<select name="userDiv" id="userDiv" class="form-control input-sm">
+	   									<option value="1" selected>구매자</option>
+	   									<option value="2">판매자</option>
+   									</select>
+    							</td>
+    						</tr>
+    						<tr>
+    							<td class="req">관심분야</td>
+    							<td>
+    								<select name="interest1" id="interest1" class="interest form-control" required>
+	   									<option value=""> - 분야1 선택 - </option>
+	   									<option value="주문제작">주문제작</option>
+	   									<option value="문서작성">문서작성</option>
+										<option value="번역·통역">번역·통역</option>
+										<option value="사진·영상">사진·영상</option>
+										<option value="상담">상담</option>
+	   									<option value="기타">기타</option>
+   									</select>
+    								<select name="interest2" id="interest2" class="interest form-control" required>
+	   									<option value=""> - 분야2 선택 - </option>
+										<option value="주문제작">주문제작</option>
+										<option value="문서작성">문서작성</option>
+										<option value="번역·통역">번역·통역</option>
+										<option value="사진·영상">사진·영상</option>
+										<option value="상담">상담</option>
+										<option value="기타">기타</option>
+   									</select>
+    							</td>
+    						</tr>
+    						<tr>
+    							<td colspan="2">
+    								<button type="button" id="joinSbmBtn" class="frmBtn btn btn-primary">회원가입</button>
+    								<button type="reset" class="frmBtn btn btn-primary">다시쓰기</button>
+    							</td>
+    						</tr>
+    					</tbody>
+    				</table>
+					<!-- 회원 가입 정보 입력 끝 -->
+
+    			</form>
+    		</div>
+    	</main>
+		<!-- 작업 영역 끝 -->
+
+    	<hr class="sepLine">
+
+    </div>
+</body>
+</html>

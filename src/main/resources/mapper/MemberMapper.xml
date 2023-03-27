@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="please.spring.mapper.MemberMapper">
+
+    <insert id="insertMember" parameterType="please.spring.dto.MemberDTO">
+        <![CDATA[
+        insert into user (
+            user_id, user_pw, user_name,
+            pic_file_name, pic_file_size,
+            user_email, user_contact, user_address,
+            user_div, interest1, interest2, join_datetime
+		)
+		values (
+		    #{userID}, #{userPW}, #{userName},
+		    #{picFileName}, #{picFileSize},
+		    #{userEmail}, #{userContact}, #{userAddress},
+		    #{userDiv}, #{interest1}, #{interest2}, now()
+        )
+        ]]>
+    </insert>
+
+    <select id="loginCheck" parameterType="please.spring.dto.MemberDTO" resultType="please.spring.dto.MemberDTO">
+        <![CDATA[
+        select user_id, user_div from user where user_id = #{userID} and user_pw = #{userPW}
+        ]]>
+    </select>
+
+    <select id="selectMemberDetail" parameterType="String" resultType="please.spring.dto.MemberDTO">
+        <![CDATA[
+        select user_id, user_pw, user_name, pic_file_name, pic_file_size, user_email, user_contact,
+		user_address, user_div, interest1, interest2, join_datetime
+		from user where user_id = #{userID}
+        ]]>
+    </select>
+
+    <update id="updateMember" parameterType="please.spring.dto.MemberDTO">
+        <![CDATA[
+        update user set user_id = #{userID}, user_pw = #{userPW}, user_name = #{userName},
+        pic_file_name = #{picFileName}, pic_file_size = #{picFileSize}, user_email = #{userEmail},
+        user_contact = #{userContact}, user_address = #{userAddress},
+		user_div = #{userDiv}, interest1 = #{interest1}, interest2 = #{interest2}
+		where user_id=#{sessionUserID}
+        ]]>
+    </update>
+
+    <delete id="deleteMember" parameterType="String">
+        <![CDATA[
+        delete from user where user_id = #{sessionUserID}
+        ]]>
+    </delete>
+
+
+</mapper>

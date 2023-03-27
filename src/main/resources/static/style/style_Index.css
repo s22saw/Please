@@ -1,0 +1,218 @@
+@charset "UTF-8";
+@import url(/source/style_Reset.css);
+
+/*********************************/
+/**** 인덱스 페이지 (index) 시작 ****/
+/*********************************/
+
+div#wrap {
+	width: 1000px;
+	height: 1100px;
+	border: 2px solid #c0c0c0;
+}
+
+div#productCategory {
+	width: 100%;
+}
+
+div#productCategory > ul#productCategoryUl {
+	width: 80%;
+	height: 40px;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 auto;
+}
+
+div#contents {
+	padding: 10px;
+	justify-content: space-between;
+}
+
+div#contents > div#populProductHeader {
+	width: 950px;
+	height: 30px;
+	padding: 5px;
+	margin: 10px auto;
+}
+
+#populProductHeader span{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+div#contents > div#populProductList{
+	width: 950px;
+	height: 225px;
+	padding: 5px 0;
+	margin: 0 auto;
+}
+
+.populProduct {
+	padding: 0 10px;
+}
+
+#populProductList .populProduct img {
+	width: 170px;
+	height: 130px;
+}
+
+#populProductList .populProduct span.compName {
+	display: block;
+	text-align: left;
+	color: #c0c0c0;
+	font-size: 10px;
+	padding: 2px 0;
+}
+
+#populProductList .populProduct span.prodSubject {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	height: 40px;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 2px 0;
+}
+
+#populProductList .populProduct span.prodPrice {
+	display: block;
+	text-align: right;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 2px 0;
+}
+
+#populProductList .populProduct span.prodRate {
+	color: #bebebe;
+	display: block;
+	text-align: right;
+	font-size: 11px;
+	padding: 2px 0;
+}
+
+span.prodRate span.reviewScore {
+	color: #ffd400;
+	font-size: 11px;
+	padding: 2px 0;
+}
+
+div#contents > div#newProductHeader {
+	width: 950px;
+	height: 30px;
+	padding: 5px;
+	margin: 10px auto;
+}
+
+#newProductHeader span {
+	font-weight: bold;
+	font-size: 16px;
+}
+
+div#contents > div#newProductList{
+	width: 950px;
+	height: 225px;
+	padding: 5px 0;
+	margin: 0 auto;
+}
+
+.newProduct {
+	padding: 0 10px;
+}
+
+#newProductList .newProduct img {
+	width: 170px;
+	height: 130px;
+}
+
+#newProductList .newProduct span.compName {
+	display: block;
+	text-align: left;
+	color: #c0c0c0;
+	font-size: 10px;
+	padding: 2px 0;
+}
+
+#newProductList .newProduct span.prodSubject {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	height: 40px;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 2px 0;
+}
+
+#newProductList .newProduct span.prodPrice {
+	display: block;
+	text-align: right;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 2px 0;
+}
+
+#newProductList .newProduct span.prodRate {
+	color: #bebebe;
+	display: block;
+	text-align: right;
+	font-size: 11px;
+	padding: 2px 0;
+}
+
+span.prodRate span.reviewScore {
+	color: #ffd400;
+	font-size: 11px;
+	padding: 2px 0;
+}
+
+div#contents > div#productRankHeader {
+	width: 950px;
+	height: 30px;
+	padding: 5px;
+	margin: 10px auto;
+}
+
+#productRankHeader span{
+	font-weight: bold;
+	font-size: 16px;
+}
+
+div#contents > div#productRank {
+	justify-content: space-between;
+}
+
+#productRank .productRankBoard {
+	width: 300px;
+}
+
+#productRank .productRankBoardSubject {
+	font-size: 14px;
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+.productRankBoard {
+	padding: 5px;
+}
+
+.productRankBoard table.productRankTbl {
+	border: 1px solid #000;
+	width: 100%;
+	margin-top: 10px;
+}
+
+table.productRankTbl td.c1 {
+	font-weight: bold;
+	background-color: #eef1f8;
+}
+
+.productRankBoard table.productRankTbl td {
+	text-align: center;
+}
+
+/********************************/
+/**** 인덱스 페이지 (index) 끝 ****/
+/********************************/

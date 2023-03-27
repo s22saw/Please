@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구매 목록</title>
+
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/style/style_Product.css">
+	</th:block>
+
+	<th:block layout:fragment="script">
+		<script src="/script/script_Product.js"></script>
+	</th:block>
+
+	<script th:inline="javascript">
+		// 리뷰 작성하기 버튼 클릭 시 나타나는 팝업 메뉴 (button#reviewWriteBtn)
+		function reviewPopup(purchaseNo) {
+
+			let url = "/addReview?purchaseNo=" + purchaseNo;
+			let name = "리뷰 작성 팝업";
+
+			// 팝업창 브라우저 중앙 위치
+			let popupX = (document.body.offsetWidth / 2) - (480 / 2);
+
+			// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+			let popupY= (window.screen.height / 2) - (350 / 2);
+
+			// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+			let option = "status=no, height=350, width=480, left=" + popupX + ", top=" + popupY;
+
+			window.open(url, name, option);
+
+		}
+	</script>
+
+</head>
+<body>
+    <div id="wrap" layout:fragment="content">
+
+    	<hr class="sepLine">
+    	
+    	<main id="main" class="dFlex">
+
+    		<!-- 작업 영역 시작 -->
+    		<div id="buyerBasket">
+
+    				<h1>구매내역</h1>
+    				<table id="basketList" class="table-bordered">
+    					<tbody>
+    						<tr>
+    							<td class="c1">판매자명</td>
+    							<td class="c1">서비스명</td>
+    							<td class="c1">구매 일자</td>
+    							<td class="c1">가격</td>
+    							<td class="c1">리뷰 작성</td>
+    						</tr>
+						<th:block th:each="list : ${selectPurchaseList}">
+							<tr>
+								<td class="c2">
+									<a th:href="@{/detailProduct(productNo=${list.productNo})}">
+										[[${list.userName}]]
+									</a>
+								</td>
+								<td class="c2">
+									<a th:href="@{/detailProduct(productNo=${list.productNo})}">
+										[[${list.productName}]]
+									</a>
+								</td>
+								<td class="c2">
+									<a th:href="@{/detailProduct(productNo=${list.productNo})}">
+										[[${list.purchaseDatetime}]]
+									</a>
+								</td>
+								<td class="c2">
+									<a th:href="@{/detailProduct(productNo=${list.productNo})}">
+										[[${list.productPrice}]]
+									</a>
+								</td>
+								<td class="c2">
+									<button type="button"
+											th:if="${list.reviewYN=='n'}"
+											th:purchaseNo="${list.purchaseNo}"
+											th:onclick="reviewPopup(this.getAttribute('purchaseNo'))"
+											id="reviewWriteBtn" class="btn btn-primary btn-lg active">리뷰 작성
+									</button>
+									<button type="button"
+											th:if="${list.reviewYN=='y'}"
+											id="reviewWriteBtn2" class="btn btn-lg btn-primary" disabled>작성 완료
+									</button>
+								</td>
+							</tr>
+						</th:block>
+    					</tbody>
+    				</table>
+    		</div>
+
+			</th:block>
+    	</main>
+		<!-- 작업 영역 끝 -->
+
+    	<hr class="sepLine">
+
+    </div>
+</body>
+</html>

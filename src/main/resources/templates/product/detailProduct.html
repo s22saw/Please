@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>제품 상세</title>
+
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/style/style_Product.css">
+	</th:block>
+
+	<th:block layout:fragment="script">
+		<script src="/script/script_Product.js"></script>
+	</th:block>
+
+</head>
+<body>
+	<div id="wrap" layout:fragment="content">
+
+		<hr class="sepLine">
+
+		<th:block th:each="list : ${selectDetailProduct}">
+		<form name="addBasketFrm" id="addBasketFrm" method="post">
+
+			<main id="productMain" class="dFlex">
+
+				<!-- 서비스 이미지 영역 시작 -->
+				<div id="productImgArea">
+					<div id="productMainImg">
+						<img th:src="@{/productFileUpload/} + ${list.fileName1}" id="mainProductImg" class="mainProductImg" alt="mainProductImg" onerror="this.src='/images/productContent.png'">
+					</div>
+					<div id="productSubImg" class="dFlex">
+						<div id="thumbnailImg1" class="thumbnailImg">
+							<img th:src="@{/productFileUpload/} + ${list.fileName2}" class="subProductImg" alt="subProductImg" onerror="this.src='/images/productContent.png'">
+						</div>
+						<div id="thumbnailImg2" class="thumbnailImg">
+							<img th:src="@{/productFileUpload/} + ${list.fileName3}" class="subProductImg" alt="subProductImg" onerror="this.src='/images/productContent.png'">
+						</div>
+						<div id="thumbnailImg3" class="thumbnailImg">
+							<img th:src="@{/productFileUpload/} + ${list.fileName4}" class="subProductImg" alt="subProductImg" onerror="this.src='/images/productContent.png'">
+						</div>
+						<div id="thumbnailImg4" class="thumbnailImg">
+							<img th:src="@{/productFileUpload/} + ${list.fileName5}" class="subProductImg" alt="subProductImg" onerror="this.src='/images/productContent.png'">
+						</div>
+					</div>
+				</div>
+				<!-- 서비스 이미지 영역 끝 -->
+
+				<!-- 서비스 세부 메뉴 영역 시작 -->
+				<div id="productDetail">
+					<div id="productTopInfo">
+						<div id="productMenu">
+							<ul>
+								<li id="liCategory" class="productMenuLi" th:text="${list.category}" />
+								<li id="liProductName" name="productName" class="productMenuLi" th:text="${list.productName}">
+									<input type="hidden" name="productName" th:value="${list.productName}">
+								</li>
+								<li class="productMenuLi">
+									<p>
+									<div id="productOptionTitle">상품 가격</div>
+									<div id="productOption">
+										<div id="productPrice" name="productPrice" class="productOptionDetail" th:text="${#numbers.formatInteger(list.productPrice, 0, 'COMMA')} + ' 원'">
+											<input type="hidden" name="productPrice" th:value="${list.productPrice}">
+										</div>
+									</div>
+									</p>
+								</li>
+								<li class="productMenuLiBasket">
+									<a th:href="@{/addBasketProduct}" th:if="${session.memberDTO!=null} and ${session.memberDTO.userDiv!=2}">
+										<button type="button" id="addBasketBtn" class="btn btn-block">장바구니 담기</button>
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<hr>
+
+						<div id="sellerInfo">
+							<div id="sellerInfoTitle">판매자 정보</div>
+							<div id="sellerPic"><img th:src="@{/memberFileUpload/} + ${list.picFileName}" class="memberImg" alt="memberImg" onerror="this.src='/images/defaultProfile.png'"></div>
+							<div id="sellerName" th:text="${list.userName}">
+								<input type="hidden" name="sellerName" th:value="${list.userName}">
+							</div>
+							<div id="sellerContact" th:text="${list.userContact}" />
+						</div>
+						<hr>
+
+						<div id="productReviewTopTitle"><a href="#reviewSubject">서비스 평가</a></div>
+
+						<div id="productReviewTop" class="dFlex">
+							<th:block th:each="review1 : ${selectReviewSimpleInfoLimit}">
+								<div class="reviewItem">
+									<div class="reviewUserInfo">
+										<span class="reviewUserName" th:text="${review1.userName}" />
+										<span class="reviewRate" th:text="'★' + ${review1.reviewScore}" />
+										<span class="reviewDate" th:text="${review1.writeDatetime}" />
+									</div>
+									<div class="reviewUserText" th:text="${review1.reviewDesc}" />
+								</div>
+							</th:block>
+						</div>
+
+					</div>
+				</div>
+				<!-- 서비스 세부 메뉴 영역 끝 -->
+
+			</main>
+
+			<!-- 서비스 설명 영역 시작 -->
+			<div id="productDesc">
+				<p>[[${list.productDesc}]]</p>
+			</div>
+			<!-- 서비스 설명 영역 끝 -->
+
+			<!-- 리뷰 영역 시작 -->
+			<div id="productReviewBottom">
+				<div id="reviewSubject">서비스 평가</div>
+				<div id="reviewHeader">
+					<span class="totalReviewRate" th:text="'★' +  ${list.reviewScore}" />&nbsp;&nbsp;|&nbsp;
+					<span class="totalReviewCnt" th:text="${list.reviewCnt}" /> 개의 평가
+				</div>
+				<th:block th:each="review2 : ${selectReviewSimpleInfo}">
+					<div class="reviewItem">
+						<div class="reviewUserInfo">
+							<span class="reviewUserName" th:text="${review2.userName}" />
+							<span class="reviewRate" th:text="'★' + ${review2.reviewScore}" />
+							<span class="reviewDate" th:text="${review2.writeDatetime}" />
+						</div>
+						<div class="reviewUserText" th:text="${review2.reviewDesc}" />
+					</div>
+				</th:block>
+				<a href="/modifyProduct" th:if="${session.selectProductOwner==1}">
+					<button type="button" id="productModifyBtn" class="btn btn-block">제품 수정하기</button>
+				</a>
+				<a href="/deleteProduct" th:if="${session.selectProductOwner==1}">
+					<button type="button" id="productDeleteBtn" class="btn btn-block">제품 삭제하기</button>
+				</a>
+			</div>
+			<!-- 리뷰 영역 끝 -->
+
+			<hr class="sepLine">
+
+		</form>
+		</th:block>
+	</div>
+
+
+
+
+</body>
+</html>

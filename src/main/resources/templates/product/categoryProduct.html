@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>분야별 서비스 목록</title>
+
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" href="/style/style_Product.css">
+    </th:block>
+
+</head>
+<body>
+    <div id="wrapAllProduct" layout:fragment="content">
+
+        <hr class="sepLine">
+
+        <!-- 실제 작업 영역 시작 -->
+        <main id="main">
+
+            <div id="allProductHeader">
+                <span th:each="list, userStat : ${selectCategoryProduct}" th:if="${userStat.index eq 0}">[[${list.category}]] 서비스 목록</span>
+            </div>
+
+            <hr class="sepLine">
+
+            <div id="contents">
+
+                <!-- 서비스 목록 시작 -->
+                <div id="allProductList" class="dFlex_5">
+                    <div class="allProduct" th:each="list : ${selectCategoryProduct}">
+                        <a th:href="@{/detailProduct(productNo=${list.productNo})}">
+                            <img th:src="@{/productFileUpload/} + ${list.fileName1}" class="productImg" alt="productImg">
+                            <span class="compName" th:text="${list.userName}" />
+                            <span class="prodSubject" th:text="${list.productName}" />
+                            <span class="prodPrice" th:text="${#numbers.formatInteger(list.productPrice, 0, 'COMMA')} + ' 원'" />
+                            <span class="prodRate">
+                                <span class="reviewScore" th:text="'★ ' + ${list.reviewScore}" />
+                                &nbsp;&nbsp;|&nbsp;&nbsp;[[${list.reviewCnt}]] 개의 평가
+                            </span>
+                        </a>
+                        <br>
+                    </div>
+                </div>
+                <!-- 서비스 목록 끝 -->
+
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+                <hr class="sepLine">
+
+            </div>
+
+            <!-- 페이징 시작 -->
+            <div id="paging">
+                <ul class="pagination">
+                    <li th:if="${pageMaker.isPrev()}" class="page-item">
+                        <a th:href="@{/categoryProduct(category=${session.category},page=${pageMaker.startPage-1})}" class="page-link">이전</a>
+                    </li>
+
+                    <li th:each="i: ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}" class="page-item">
+                        <a th:href="@{/categoryProduct(category=${session.category},page=${i})}" th:text="${i}" class="page-link"></a>
+                    </li>
+                    <li th:if="${pageMaker.isNext() && pageMaker.endPage >0 }" class="page-item">
+                        <a th:href="@{/categoryProduct(category=${session.category},page=${pageMaker.endPage+1})}" class="page-link">다음</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 페이징 끝 -->
+
+        </main>
+        <!--  작업 영역 끝  -->
+
+        <hr class="sepLine">
+
+    </div>
+</body>
+</html>

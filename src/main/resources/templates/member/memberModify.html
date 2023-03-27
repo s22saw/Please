@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>회원 정보 수정</title>
+
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/style/style_Member.css">
+	</th:block>
+
+	<th:block layout:fragment="script">
+		<script src="/script/script_Join.js"></script>
+	</th:block>
+
+</head>
+<body>
+	<div id="wrap" layout:fragment="content">
+
+		<hr class="sepLine">
+
+		<!-- 작업 영역 시작 -->
+		<main id="mainMemberJoin" class="dFlex">
+    		<div id="contents" class="joinInsert">
+				<th:block th:each="list : ${selectMemberDetail}">
+					<form th:action="@{memberModify}" name="regUpdateFrm" id="regUpdateFrm" class="form-inline" enctype="multipart/form-data" method="post">
+						<span>회원 정보 수정</span>
+
+						<!-- 회원 정보 수정 시작 -->
+						<table id="regFrmTbl" class="table table-bordered">
+							<tbody>
+								<tr>
+									<td>프로필 사진</td>
+									<td id="modPicFileImg" class="dFlex">
+										<img th:src="@{/memberFileUpload/} + ${list.picFileName}" class="profileImg" alt="profileImg" onerror="this.src='/images/defaultProfile.png'">
+										<input type="file" name="modPicFile" id="modPicFile">
+									</td>
+								</tr>
+								<tr>
+									<td class="req">아이디</td>
+									<td>
+										<input type="text" name="modUserID" id="modUserID" class="form-control input-sm" maxlength="20" readonly th:placeholder="${list.userID}" th:value="${list.userID}">
+									</td>
+								</tr>
+								<tr>
+									<td class="req">패스워드</td>
+									<td>
+										<input type="password" name="modUserPW" id="modUserPW" class="form-control input-sm" maxlength="20" autofocus th:placeholder="${list.userPW}" th:value="${list.userPW}">
+									</td>
+								</tr>
+								<tr>
+									<td class="req">이름</td>
+									<td>
+										<input type="text" name="modUserName" id="modUserName" class="form-control input-sm" maxlength="20" th:placeholder="${list.userName}" th:value="${list.userName}">
+									</td>
+								</tr>
+								<tr>
+									<td class="req">Email</td>
+									<td>
+										<input type="text" name="modUserEmail" id="modUserEmail" class="form-control input-sm" maxlength="20" size="20" th:placeholder="${list.userEmail}" th:value="${list.userEmail}">
+									</td>
+								</tr>
+								<tr>
+									<td>연락처 (-를 제외한 숫자를 기입하세요)</td>
+									<td>
+										<input type="text" name="modUserContact" id="modUserContact" class="form-control input-sm" maxlength="20" th:placeholder="${list.userContact}" th:value="${list.userContact}">
+									</td>
+								</tr>
+								<tr>
+									<td>주소</td>
+									<td>
+										<input type="text" name="modUserAddress" id="modUserAddress" class="form-control input-sm" maxlength="100" size="50" th:placeholder="${list.userAddress}" th:value="${list.userAddress}">
+									</td>
+								</tr>
+								<tr>
+									<td>회원 유형</td>
+									<td>
+										<select name="modUserDiv" id="modUserDiv" class="form-control input-sm">
+											<option value=""> - 회원 유형 선택 - </option>
+											<option th:value="'1'" th:selected="${list.userDiv} == '1'">구매자</option>
+											<option th:value="'2'" th:selected="${list.userDiv} == '2'">판매자</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td class="req">관심분야</td>
+									<td>
+										<select name="modInterest1" id="modInterest1" class="interest form-control">
+											<option value=""> - 분야1 선택 - </option>
+											<option th:value="'주문제작'" th:selected="${list.interest1} == '주문제작'">주문제작</option>
+											<option th:value="'문서작성'" th:selected="${list.interest1} == '문서작성'">문서작성</option>
+											<option th:value="'번역·통역'" th:selected="${list.interest1} == '번역·통역'">번역·통역</option>
+											<option th:value="'사진·영상'" th:selected="${list.interest1} == '사진·영상'">사진·영상</option>
+											<option th:value="'상담'" th:selected="${list.interest1} == '상담'">상담</option>
+											<option th:value="'기타'" th:selected="${list.interest1} == '기타'">기타</option>
+										</select>
+										<select name="modInterest2" id="modInterest2" class="interest form-control">
+											<option value=""> - 분야2 선택 - </option>
+											<option th:value="'주문제작'" th:selected="${list.interest2} == '주문제작'">주문제작</option>
+											<option th:value="'문서작성'" th:selected="${list.interest2} == '문서작성'">문서작성</option>
+											<option th:value="'번역·통역'" th:selected="${list.interest2} == '번역·통역'">번역·통역</option>
+											<option th:value="'사진·영상'" th:selected="${list.interest2} == '사진·영상'">사진·영상</option>
+											<option th:value="'상담'" th:selected="${list.interest2} == '상담'">상담</option>
+											<option th:value="'기타'" th:selected="${list.interest2} == '기타'">기타</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<button type="button" id="regUpdateBtn" class="frmBtn btn btn-primary">수정완료</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- 회원 정보 수정 끝 -->
+
+					</form>
+				</th:block>
+    		</div>
+    	</main>
+		<!-- 작업 영역 끝 -->
+
+    	<hr class="sepLine">
+
+    </div>
+</body>
+</html>

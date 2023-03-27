@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니</title>
+
+	<th:block layout:fragment="css">
+		<link rel="stylesheet" href="/style/style_Product.css">
+	</th:block>
+
+	<th:block layout:fragment="script">
+		<script src="/script/script_Product.js"></script>
+	</th:block>
+
+</head>
+<body>
+    <div id="wrap" layout:fragment="content">
+
+    	<hr class="sepLine">
+    	
+		<!-- 작업 영역 시작 -->
+    	<main id="main" class="dFlex">
+
+    		<div id="buyerBasket">
+				<span>장바구니</span>
+				<th:block th:each="list : ${selectBasketUser}">
+
+				<!-- 구매자 정보 시작 -->
+				<table id="buyerInfoTbl" class="table-bordered">
+					<tbody>
+						<tr>
+							<td colspan="2">구매자 정보</td>
+						</tr>
+						<tr>
+							<td class="c1">이름</td>
+							<td class="c2">
+								[[${list.userName}]]
+							</td>
+						</tr>
+						<tr>
+							<td class="c1">이메일</td>
+							<td class="c2">
+								[[${list.userEmail}]]
+							</td>
+						</tr>
+						<tr>
+							<td class="c1">연락처</td>
+							<td class="c2">
+								[[${list.userContact}]]
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<!-- 구매자 정보 끝 -->
+
+				</th:block>
+
+				<!-- 장바구니 목록 시작 -->
+				<table id="basketList" class="table-bordered">
+					<tbody>
+						<tr>
+							<td class="c1">판매자명</td>
+							<td class="c1">서비스명</td>
+							<td class="c1">가격</td>
+							<td class="c1">개별 구매</td>
+							<td class="c1">개별 삭제</td>
+						</tr>
+						<th:block th:each="list : ${selectBasket}">
+						<form th:action="@{'/deleteBasketItem/'+${list.basketNo}}" name="basketFrm" id="basketFrm" method="post">
+							<tr>
+								<input type="hidden" id="basketNo" th:name="basketNo+${list.basketNo}" th:value="${list.basketNo}">
+								<td class="c2">
+									<a th:href="@{/detailProduct(productNo=${list.productNo})}">
+										[[${list.userName}]]
+									</a>
+									<input type="hidden" id="sellerName" name="sellerName" th:value="${list.userName}">
+								</td>
+								<td class="c2">
+									<a th:href="@{/detailProduct(productNo=${list.productNo})}">
+										[[${list.productName}]]
+									</a>
+									<input type="hidden" id="productName" name="productName" th:value="${list.ProductName}">
+								</td>
+								<td class="c2">
+									[[${list.productPrice}]]
+									<input type="hidden" id="productPrice" name="productPrice" th:value="${list.productPrice}">
+								</td>
+								<td class="c2">
+									<a th:href="@{'/insertPurchaseItem/'+${list.basketNo}}">
+										<button type="button" id="purchaseBasketItemBtn" class="purchaseBasketItemBtn btn btn-primary">구매</button>
+									</a>
+								</td>
+								<td class="c2">
+									<button type="submit" id="delBasketItemBtn" class="delBasketItemBtn btn btn-primary">삭제</button>
+								</td>
+							</tr>
+						</form>
+						</th:block>
+					</tbody>
+				</table>
+				<!-- 장바구니 목록 끝 -->
+
+				<a id="deleteBasketAll">
+					<button type="button" id="deleteAllBtn" class="btn btn-primary">전체 삭제</button>
+				</a>
+				<a id="insertPurchaseBasket">
+					<button type="button" id="buyBasketBtn" class="btn btn-primary">전체 상품 구매</button>
+				</a>
+    		</div>
+			</th:block>
+    	</main>
+		<!-- 작업 영역 끝 -->
+
+    	<hr class="sepLine">
+
+    </div>
+    <!-- div#wrap 끝 -->
+
+</body>
+</html>

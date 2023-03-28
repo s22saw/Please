@@ -5,6 +5,9 @@
 /**** 제품 관련 영역 시작 (product) 시작 ****/
 /*****************************************/
 
+body {
+    inline-size: 3440px;
+}
 
 /*---------------------------------------------------------------------------------------------------------------------*/
 /*---- 제품 등록, 제품 상세, 제품 수정 페이지 시작 (/product/addProduct, /product/detailProduct, /product/modifyProduct) ----*/
@@ -237,6 +240,8 @@ div#productDesc p textarea {
 	font-weight: bold;
 }
 
+
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 /*---- 제품 등록, 제품 상세, 제품 수정 페이지 끝 (/product/addProduct, /product/detailProduct, /product/modifyProduct) ----*/
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -262,6 +267,18 @@ div#productReviewBottom div#reviewHeader {
     padding-bottom: 15px;
 }
 
+div#productReviewBottom div.reviewItem {
+    padding: 10px 0;
+}
+
+div#sellerMenuBtn {
+    text-align: center;
+}
+
+div#sellerMenuBtn button {
+    display: inline-block;
+}
+
 #reviewHeader span.totalReviewRate {
 	font-size: 10px;
 	font-weight: bold;
@@ -273,9 +290,6 @@ div#productReviewBottom div#reviewHeader {
 	font-weight: bold;
 }
 
-div#productReviewBottom div.reviewItem {
-    padding: 10px 0;
-}
 
 #wrap div#productContent {
 	border: 1px solid #000;
@@ -320,6 +334,14 @@ div#reviewContents td.c2 {
 
 div#reviewContents {
 	width: 480px;
+}
+
+div#reviewMenuBtn {
+    text-align: center;
+}
+
+div#reviewMenuBtn button {
+    display: inline-block;
 }
 
 /*------------------------------------------------*/

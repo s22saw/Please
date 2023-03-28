@@ -19,10 +19,6 @@
     box-sizing: border-box;
 }
 
-/*  배경색 필요할 경우 사용함
-body {  background-color: rgba(255, 255, 255, 0);  }
-*/
-
 a:link {    
     color: #222;
     text-decoration: none;  
@@ -59,8 +55,6 @@ article, aside, footer {
 
 div#wrap {
     padding: 10px;
-    /*border: 6px solid #aaa;*/
-    /*border-radius: 6px;*/
     margin: 20px auto;
 }
 

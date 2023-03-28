@@ -130,12 +130,14 @@
 						<div class="reviewUserText" th:text="${review2.reviewDesc}" />
 					</div>
 				</th:block>
-				<a href="/modifyProduct" th:if="${session.selectProductOwner==1}">
-					<button type="button" id="productModifyBtn" class="btn btn-block">제품 수정하기</button>
-				</a>
-				<a href="/deleteProduct" th:if="${session.selectProductOwner==1}">
-					<button type="button" id="productDeleteBtn" class="btn btn-block">제품 삭제하기</button>
-				</a>
+				<div id="sellerMenuBtn">
+					<a href="/modifyProduct" th:if="${session.selectProductOwner==1}">
+						<button type="button" id="productModifyBtn" class="btn btn-primary">제품 수정하기</button>
+					</a>
+					<a href="/deleteProduct" th:if="${session.selectProductOwner==1}">
+						<button type="button" id="productDeleteBtn" class="btn btn-primary">제품 삭제하기</button>
+					</a>
+				</div>
 			</div>
 			<!-- 리뷰 영역 끝 -->
 
